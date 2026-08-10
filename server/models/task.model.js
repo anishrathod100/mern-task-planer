@@ -1,0 +1,24 @@
+import mongoose from "mongoose";
+
+const taskSchema = new mongoose.Schema(
+  {
+    text: {
+      type: String,
+      required: [true, "This field is required"],
+    },
+    taskDone: {
+      type: Boolean,
+      required: true,
+    },
+    colors: {
+      type: String,
+      enum: ["red", "pink", "blue", "green", "yellow", "grey"],
+      default: "grey",
+    },
+  },
+  { timestamps: true }
+);
+
+const Task = new mongoose.model("Task", taskSchema);
+
+export default Task;
