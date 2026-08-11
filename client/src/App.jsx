@@ -1,11 +1,140 @@
-import React from 'react'
-
+import React, { useState } from "react";
+import { FaPlus, FaUser } from "react-icons/fa";
 const App = () => {
+  const [color, setColor] = useState("gray");
+  console.log(`text-${color}-500`);
   return (
-    <div>
-      
-    </div>
-  )
-}
+    <>
+      <div className="w-full h-screen bg-[#111]">
+        <div className="w-full">
+          {/* header  */}
+          <div className="w-full bg-[#222] py-4 px-4 md:px-12 flex justify-between items-center">
+            <h1 className="capitalize text-white text-[20px] font-bold">
+              to<span className={`text-${color}-500`}>do</span> planer
+            </h1>
 
-export default App
+            <div className="w-[35px] aspect-square rounded-full bg-[#111] flex justify-center items-center">
+              <FaUser className="text-white" />
+            </div>
+          </div>
+
+          {/* insert data  */}
+          <div className="w-full p-4 md:px-12 grid grid-cols-12 gap-4 items-center">
+            <div className="w-full col-span-8 bg-[#222] p-2 rounded-full">
+              <form className="flex gap-4 items-center">
+                <input
+                  type="text"
+                  className="w-full outline-none px-2 text-white text-sm "
+                  placeholder="Write title here..."
+                />
+                <div className="flex items-center gap-4">
+                  <div className="flex items-center gap-2">
+                    <label className="cursor-pointer">
+                      <input
+                        type="radio"
+                        name="color"
+                        value="gray"
+                        className="hidden"
+                        checked={color === "gray"}
+                        onChange={(e) => setColor(e.target.value)}
+                      />
+                      <span
+                        className={`w-[18px] aspect-square rounded-full bg-gray-500 block ${color === "gray" ? "border-2 border-white" : "border-2 border-transparent"}`}
+                      ></span>
+                    </label>
+                    <label className="cursor-pointer">
+                      <input
+                        type="radio"
+                        name="color"
+                        value="green"
+                        className="hidden"
+                        checked={color === "green"}
+                        onChange={(e) => setColor(e.target.value)}
+                      />
+                      <span
+                        className={`w-[18px] aspect-square rounded-full bg-green-500 block ${color === "green" ? "border-2 border-white" : "border-2 border-transparent"}`}
+                      ></span>
+                    </label>
+                    <label className="cursor-pointer">
+                      <input
+                        type="radio"
+                        name="color"
+                        value="red"
+                        className="hidden"
+                        checked={color === "red"}
+                        onChange={(e) => setColor(e.target.value)}
+                      />
+                      <span
+                        className={`w-[18px] aspect-square rounded-full bg-red-500 block ${color === "red" ? "border-2 border-white" : "border-2 border-transparent"}`}
+                      ></span>
+                    </label>
+                    <label className="cursor-pointer">
+                      <input
+                        type="radio"
+                        name="color"
+                        value="blue"
+                        className="hidden"
+                        checked={color === "blue"}
+                        onChange={(e) => setColor(e.target.value)}
+                      />
+                      <span
+                        className={`w-[18px] aspect-square rounded-full bg-blue-500 block ${color === "blue" ? "border-2 border-white" : "border-2 border-transparent"}`}
+                      ></span>
+                    </label>
+                    <label className="cursor-pointer">
+                      <input
+                        type="radio"
+                        name="color"
+                        value="yellow"
+                        className="hidden"
+                        checked={color === "yellow"}
+                        onChange={(e) => setColor(e.target.value)}
+                      />
+                      <span
+                        className={`w-[18px] aspect-square rounded-full bg-yellow-500 block ${color === "yellow" ? "border-2 border-white" : "border-2 border-transparent"}`}
+                      ></span>
+                    </label>
+                    <label className="cursor-pointer">
+                      <input
+                        type="radio"
+                        name="color"
+                        value="pink"
+                        className="hidden"
+                        checked={color === "pink"}
+                        onChange={(e) => setColor(e.target.value)}
+                      />
+                      <span
+                        className={`w-[18px] aspect-square rounded-full bg-pink-500 block ${color === "pink" ? "border-2 border-white" : "border-2 border-transparent"}`}
+                      ></span>
+                    </label>
+                  </div>
+                  <button className="w-[35px] aspect-square rounded-full bg-white text-black flex justify-center items-center cursor-pointer">
+                    <FaPlus />
+                  </button>
+                </div>
+              </form>
+            </div>
+            <div className="w-full col-span-4">
+              <div className="flex gap-2 justify-end">
+                <button className="bg-green-200 border border-green-400 text-green-600 flex items-center gap-2 px-2 py-1 rounded-full cursor-pointer text-sm">
+                  <h4>Complated</h4>
+                  <span>0</span>
+                </button>
+                <button className="bg-red-200 border border-red-400 text-red-600 flex items-center gap-2 px-2 py-1 rounded-full cursor-pointer text-sm">
+                  <h4>Pending</h4>
+                  <span>0</span>
+                </button>
+                <button className="bg-blue-200 border border-blue-400 text-blue-600 flex items-center gap-2 px-2 py-1 rounded-full cursor-pointer text-sm">
+                  <h4>Total</h4>
+                  <span>0</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default App;

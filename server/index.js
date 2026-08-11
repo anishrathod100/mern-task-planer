@@ -16,3 +16,5 @@ app.use("/api/task", taskRouter);
 app.listen(PORT, () => {
   console.log(`Running on http://localhost:${PORT}`);
 });
+
+//  MONGODB_URL="mongodb+srv://anish-mern-task:mern-task-planer@cluster0.mbwce5v.mongodb.net/mern-task?appName=Cluster0"
