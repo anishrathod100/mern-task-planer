@@ -10,21 +10,18 @@ const App = () => {
   const [color, setColor] = useState("gray");
   return (
     <>
-      <div className="w-full h-screen bg-[#111]">
-        <div className="fixed top-0 w-full h-[150px] ">
-          {/* header  */}
-          <div className="w-full bg-[#222] py-4 px-4 md:px-12 flex justify-between items-center">
-            <h1 className="capitalize text-[20px] font-bold text-white">
-              todo planer
-            </h1>
-
-            <div className="w-[35px] aspect-square rounded-full bg-[#111] flex justify-center items-center">
-              <FaUser className="text-white cursor-pointer" />
-            </div>
+      <div className=" w-full h-[100vh] overflow-y-hidden bg-[#111]">
+        <header className="sticky top-0 w-full h-[60px] bg-[#222]  px-4 md:px-12 flex justify-between items-center">
+          <h1 className="capitalize text-[20px] font-bold text-white">
+            todo planer
+          </h1>
+          <div className="w-[35px] aspect-square rounded-full bg-[#111] flex justify-center items-center">
+            <FaUser className="text-white cursor-pointer" />
           </div>
-          {/* insert data  */}
-          <div className="w-full p-4 md:px-12 grid grid-cols-12 gap-4 items-center bg-[#111]">
-            <div className="w-full col-span-8 bg-[#222] p-2 rounded-full">
+        </header>
+        <main className="px-4 md:px-12 ">
+          <div className="w-full md:h-[70px] grid md:grid-cols-12 gap-4 items-center justify-center py-2 bg-[#111]">
+            <div className="w-full  md:col-span-8 bg-[#222] p-2 rounded-full">
               <form className="flex gap-4 items-center">
                 <input
                   type="text"
@@ -76,7 +73,7 @@ const App = () => {
                       <input
                         type="radio"
                         name="color"
-                        value="blue"
+                        value="green"
                         className="hidden"
                         checked={color === "blue"}
                         onChange={(e) => setColor(e.target.value)}
@@ -118,8 +115,8 @@ const App = () => {
                 </div>
               </form>
             </div>
-            <div className="w-full col-span-4">
-              <div className="flex gap-2 justify-end">
+            <div className="w-full flex justify-center md:justify-end md:col-span-4">
+              <div className="flex gap-2 ">
                 <button className="bg-green-200 border border-green-400 text-green-600 flex items-center gap-2 px-2 py-1 rounded-full cursor-pointer text-sm">
                   <h4>Complated</h4>
                   <span>0</span>
@@ -135,78 +132,161 @@ const App = () => {
               </div>
             </div>
           </div>
-        </div>
-        <div className="h-[calc(100vh-150px)] overflow-y-auto mt-[150px] py-4 px-4 md:px-12">
-          <div className="grid grid-cols-2 gap-4">
-            <div className="bg-[#000] rounded-md p-2">
-              <div className="border-l-5 border-blue-400 rounded-md pl-3 flex justify-between items-center">
-                <div className="">
-                  <p className="text-[16px] text-gray-400">complete task</p>
-                  <span className="text-sm text-zinc-400">Created on</span>{" "}
-                  <span className="text-sm font-bold text-blue-400">
-                    Sunday
-                  </span>{" "}
-                  <span className="text-sm  text-blue-400">
-                    December 22 2025 - 02:00 PM
-                  </span>
-                </div>
-                <div className="">
-                  <button className="bg-red-500 text-white p-1 rounded-md mr-2">
-                    <FaTrash />
-                  </button>
-                  <button className="bg-green-500 text-white p-1 rounded-md cursor-pointer">
-                    {/* <FaCheckCircle /> */}
-                    <FaCircle />
-                  </button>
-                </div>
-              </div>
-            </div>
-            <div className="bg-[#000] rounded-md p-2">
-              <div className="border-l-5 border-red-400 rounded-md pl-3 flex justify-between items-center">
-                <div className="">
-                  <p className="text-[16px] text-gray-400">complete task</p>
-                  <span className="text-sm text-zinc-400">Created on</span>{" "}
-                  <span className="text-sm font-bold text-red-400">Sunday</span>{" "}
-                  <span className="text-sm  text-red-400">
-                    December 22 2025 - 02:00 PM
-                  </span>
-                </div>
-                <div className="">
-                  <button className="bg-red-500 text-white p-1 rounded-md mr-2">
-                    <FaTrash />
-                  </button>
-                  <button className="bg-green-500 text-white p-1 rounded-md cursor-pointer">
-                    {/* <FaCheckCircle /> */}
-                    <FaCircle />
-                  </button>
+          <div className="overflow-y-scroll h-[calc(100vh-130px)] py-2">
+            <div className="grid md:grid-cols-2 gap-4 ">
+              <div className="bg-[#000] rounded-md py-2 px-3">
+                <div className="border-l-5 border-blue-400 rounded-md pl-3 flex justify-between items-center">
+                  <div className="">
+                    <p className="text-[16px] text-gray-400">complete task</p>
+                    <span className="text-sm text-zinc-400">
+                      Created on
+                    </span>{" "}
+                    <span className="text-sm font-bold text-blue-400">
+                      Sunday
+                    </span>{" "}
+                    <span className="text-sm  text-blue-400">
+                      December 22 2025 - 02:00 PM
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <button className="text-red-500 cursor-pointer text-[14px] ">
+                      <FaTrash />
+                    </button>
+                    <button className="text-white cursor-pointer text-[14px] ">
+                      {/* <FaCheckCircle /> */}
+                      <FaCircle />
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>{" "}
-            <div className="bg-[#000] rounded-md p-2">
-              <div className="border-l-5 border-green-400 rounded-md pl-3 flex justify-between items-center">
-                <div className="">
-                  <p className="text-[16px] text-gray-400">complete task</p>
-                  <span className="text-sm text-zinc-400">Created on</span>{" "}
-                  <span className="text-sm font-bold text-green-400">
-                    Sunday
-                  </span>{" "}
-                  <span className="text-sm  text-green-400">
-                    December 22 2025 - 02:00 PM
-                  </span>
+              <div className="bg-[#000] rounded-md py-2 px-3">
+                <div className="border-l-5 border-green-400 rounded-md pl-3 flex justify-between items-center">
+                  <div className="">
+                    <p className="text-[16px] text-gray-400">complete task</p>
+                    <span className="text-sm text-zinc-400">
+                      Created on
+                    </span>{" "}
+                    <span className="text-sm font-bold text-green-400">
+                      Sunday
+                    </span>{" "}
+                    <span className="text-sm  text-green-400">
+                      December 22 2025 - 02:00 PM
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <button className="text-red-500 cursor-pointer text-[14px] ">
+                      <FaTrash />
+                    </button>
+                    <button className="text-white cursor-pointer text-[14px] ">
+                      {/* <FaCheckCircle /> */}
+                      <FaCircle />
+                    </button>
+                  </div>
                 </div>
-                <div className="">
-                  <button className="bg-red-500 text-white p-1 rounded-md mr-2">
-                    <FaTrash />
-                  </button>
-                  <button className="bg-green-500 text-white p-1 rounded-md cursor-pointer">
-                    {/* <FaCheckCircle /> */}
-                    <FaCircle />
-                  </button>
+              </div>
+              <div className="bg-[#000] rounded-md py-2 px-3">
+                <div className="border-l-5 border-blue-400 rounded-md pl-3 flex justify-between items-center">
+                  <div className="">
+                    <p className="text-[16px] text-gray-400">complete task</p>
+                    <span className="text-sm text-zinc-400">
+                      Created on
+                    </span>{" "}
+                    <span className="text-sm font-bold text-blue-400">
+                      Sunday
+                    </span>{" "}
+                    <span className="text-sm  text-blue-400">
+                      December 22 2025 - 02:00 PM
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <button className="text-red-500 cursor-pointer text-[14px] ">
+                      <FaTrash />
+                    </button>
+                    <button className="text-white cursor-pointer text-[14px] ">
+                      {/* <FaCheckCircle /> */}
+                      <FaCircle />
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div className="bg-[#000] rounded-md py-2 px-3">
+                <div className="border-l-5 border-green-400 rounded-md pl-3 flex justify-between items-center">
+                  <div className="">
+                    <p className="text-[16px] text-gray-400">complete task</p>
+                    <span className="text-sm text-zinc-400">
+                      Created on
+                    </span>{" "}
+                    <span className="text-sm font-bold text-green-400">
+                      Sunday
+                    </span>{" "}
+                    <span className="text-sm  text-green-400">
+                      December 22 2025 - 02:00 PM
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <button className="text-red-500 cursor-pointer text-[14px] ">
+                      <FaTrash />
+                    </button>
+                    <button className="text-white cursor-pointer text-[14px] ">
+                      {/* <FaCheckCircle /> */}
+                      <FaCircle />
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div className="bg-[#000] rounded-md py-2 px-3">
+                <div className="border-l-5 border-blue-400 rounded-md pl-3 flex justify-between items-center">
+                  <div className="">
+                    <p className="text-[16px] text-gray-400">complete task</p>
+                    <span className="text-sm text-zinc-400">
+                      Created on
+                    </span>{" "}
+                    <span className="text-sm font-bold text-blue-400">
+                      Sunday
+                    </span>{" "}
+                    <span className="text-sm  text-blue-400">
+                      December 22 2025 - 02:00 PM
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <button className="text-red-500 cursor-pointer text-[14px] ">
+                      <FaTrash />
+                    </button>
+                    <button className="text-white cursor-pointer text-[14px] ">
+                      {/* <FaCheckCircle /> */}
+                      <FaCircle />
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div className="bg-[#000] rounded-md py-2 px-3">
+                <div className="border-l-5 border-green-400 rounded-md pl-3 flex justify-between items-center">
+                  <div className="">
+                    <p className="text-[16px] text-gray-400">complete task</p>
+                    <span className="text-sm text-zinc-400">
+                      Created on
+                    </span>{" "}
+                    <span className="text-sm font-bold text-green-400">
+                      Sunday
+                    </span>{" "}
+                    <span className="text-sm  text-green-400">
+                      December 22 2025 - 02:00 PM
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <button className="text-red-500 cursor-pointer text-[14px] ">
+                      <FaTrash />
+                    </button>
+                    <button className="text-white cursor-pointer text-[14px] ">
+                      {/* <FaCheckCircle /> */}
+                      <FaCircle />
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
+        </main>
       </div>
     </>
   );
