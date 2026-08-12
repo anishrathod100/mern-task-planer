@@ -1,25 +1,29 @@
 import React, { useState } from "react";
-import { FaPlus, FaUser } from "react-icons/fa";
+import {
+  FaCheckCircle,
+  FaCircle,
+  FaPlus,
+  FaTrash,
+  FaUser,
+} from "react-icons/fa";
 const App = () => {
   const [color, setColor] = useState("gray");
-  console.log(`text-${color}-500`);
   return (
     <>
       <div className="w-full h-screen bg-[#111]">
-        <div className="w-full">
+        <div className="fixed top-0 w-full h-[150px] ">
           {/* header  */}
           <div className="w-full bg-[#222] py-4 px-4 md:px-12 flex justify-between items-center">
-            <h1 className="capitalize text-white text-[20px] font-bold">
-              to<span className={`text-${color}-500`}>do</span> planer
+            <h1 className="capitalize text-[20px] font-bold text-white">
+              todo planer
             </h1>
 
             <div className="w-[35px] aspect-square rounded-full bg-[#111] flex justify-center items-center">
-              <FaUser className="text-white" />
+              <FaUser className="text-white cursor-pointer" />
             </div>
           </div>
-
           {/* insert data  */}
-          <div className="w-full p-4 md:px-12 grid grid-cols-12 gap-4 items-center">
+          <div className="w-full p-4 md:px-12 grid grid-cols-12 gap-4 items-center bg-[#111]">
             <div className="w-full col-span-8 bg-[#222] p-2 rounded-full">
               <form className="flex gap-4 items-center">
                 <input
@@ -128,6 +132,77 @@ const App = () => {
                   <h4>Total</h4>
                   <span>0</span>
                 </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="h-[calc(100vh-150px)] overflow-y-auto mt-[150px] py-4 px-4 md:px-12">
+          <div className="grid grid-cols-2 gap-4">
+            <div className="bg-[#000] rounded-md p-2">
+              <div className="border-l-5 border-blue-400 rounded-md pl-3 flex justify-between items-center">
+                <div className="">
+                  <p className="text-[16px] text-gray-400">complete task</p>
+                  <span className="text-sm text-zinc-400">Created on</span>{" "}
+                  <span className="text-sm font-bold text-blue-400">
+                    Sunday
+                  </span>{" "}
+                  <span className="text-sm  text-blue-400">
+                    December 22 2025 - 02:00 PM
+                  </span>
+                </div>
+                <div className="">
+                  <button className="bg-red-500 text-white p-1 rounded-md mr-2">
+                    <FaTrash />
+                  </button>
+                  <button className="bg-green-500 text-white p-1 rounded-md cursor-pointer">
+                    {/* <FaCheckCircle /> */}
+                    <FaCircle />
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div className="bg-[#000] rounded-md p-2">
+              <div className="border-l-5 border-red-400 rounded-md pl-3 flex justify-between items-center">
+                <div className="">
+                  <p className="text-[16px] text-gray-400">complete task</p>
+                  <span className="text-sm text-zinc-400">Created on</span>{" "}
+                  <span className="text-sm font-bold text-red-400">Sunday</span>{" "}
+                  <span className="text-sm  text-red-400">
+                    December 22 2025 - 02:00 PM
+                  </span>
+                </div>
+                <div className="">
+                  <button className="bg-red-500 text-white p-1 rounded-md mr-2">
+                    <FaTrash />
+                  </button>
+                  <button className="bg-green-500 text-white p-1 rounded-md cursor-pointer">
+                    {/* <FaCheckCircle /> */}
+                    <FaCircle />
+                  </button>
+                </div>
+              </div>
+            </div>{" "}
+            <div className="bg-[#000] rounded-md p-2">
+              <div className="border-l-5 border-green-400 rounded-md pl-3 flex justify-between items-center">
+                <div className="">
+                  <p className="text-[16px] text-gray-400">complete task</p>
+                  <span className="text-sm text-zinc-400">Created on</span>{" "}
+                  <span className="text-sm font-bold text-green-400">
+                    Sunday
+                  </span>{" "}
+                  <span className="text-sm  text-green-400">
+                    December 22 2025 - 02:00 PM
+                  </span>
+                </div>
+                <div className="">
+                  <button className="bg-red-500 text-white p-1 rounded-md mr-2">
+                    <FaTrash />
+                  </button>
+                  <button className="bg-green-500 text-white p-1 rounded-md cursor-pointer">
+                    {/* <FaCheckCircle /> */}
+                    <FaCircle />
+                  </button>
+                </div>
               </div>
             </div>
           </div>
