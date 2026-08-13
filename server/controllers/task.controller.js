@@ -36,9 +36,7 @@ const getOneTask = async (req, res) => {
 // update task in db
 const updateTask = async (req, res) => {
   try {
-    const task = await Task.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-    });
+    const task = await Task.findByIdAndUpdate(req.params.id, req.body);
     if (!task) {
       return res.status(404).json({ message: "Task not found" });
     }
@@ -61,4 +59,20 @@ const deleteTask = async (req, res) => {
   }
 };
 
-export { addTask, getAllTask, getOneTask, updateTask, deleteTask };
+// delete task in db
+const deleteAllTask = async (req, res) => {
+  try {
+    await Task.deleteMany({});
+    res.status(200).json("All task deleted successfully");
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+export {
+  addTask,
+  getAllTask,
+  getOneTask,
+  updateTask,
+  deleteTask,
+  deleteAllTask,
+};

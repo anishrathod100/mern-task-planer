@@ -1,5 +1,7 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
+  FaBook,
+  FaBookOpen,
   FaCheckCircle,
   FaPlus,
   FaRegCircle,
@@ -12,11 +14,11 @@ const App = () => {
   const [color, setColor] = useState("gray");
   const [tasks, setTasks] = useState([]);
   const [task, setTask] = useState("");
-  const [pending, setPending] = useState("");
-  const [complate, setComplate] = useState("");
-  const [total, setTotal] = useState("");
+  const [pending, setPending] = useState(0);
+  const [completed, setCompleted] = useState(0);
+  const [total, setTotal] = useState(0);
 
-  const backend_url = "http://localhost:7000";
+  const backend_url = "http://localhost:8080";
   // get data
   const fetchData = async () => {
     try {
@@ -26,7 +28,7 @@ const App = () => {
       setPending(data.filter((item) => item.taskDone == false).length);
       setComplate(data.filter((item) => item.taskDone == true).length);
     } catch (error) {
-      toast.error(error.message);
+      console.log(error);
     }
   };
   //  add task
@@ -51,6 +53,7 @@ const App = () => {
       toast.error(error.message);
     }
   };
+
   // delete task
   const deleteTask = async (id) => {
     try {
@@ -64,10 +67,24 @@ const App = () => {
     }
   };
   // delete task
-  const updateTask = async (id) => {
+  const updateTask = async (task) => {
+    console.log(task);
     try {
-      const { data } = await axios.put(backend_url + `/api/task/${id}`, {});
+      const { data } = await axios.put(backend_url + `/api/task/${task._id}`, {
+        taskDone: !task.taskDone,
+      });
       toast.success("Task updated successfully");
+      fetchData();
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
+
+  // delete task
+  const deleteAllTask = async () => {
+    try {
+      const { data } = await axios.delete(backend_url + `/api/task`);
+      toast.success("All task deleted successfully");
       fetchData();
     } catch (error) {
       toast.error(error.message);
@@ -219,18 +236,21 @@ const App = () => {
             </div>
             <div className="w-full flex justify-center md:justify-end md:col-span-5">
               <div className="flex flex-wrap gap-2 ">
-                <button className=" bg-red-200 border border-red-400 text-red-600 flex items-center gap-2 px-3 py-1.5 rounded-full cursor-pointer text-sm">
+                <button
+                  className=" bg-red-200 border border-red-400 text-red-600 flex items-center gap-2 px-3 py-1.5 rounded-full cursor-pointer text-sm"
+                  onClick={() => deleteAllTask()}
+                >
                   <h4>Delete All </h4>
                 </button>
-                <button className="bg-green-200 border border-green-400 text-green-600 flex items-center gap-2 px-3 py-1.5 rounded-full cursor-pointer text-sm">
-                  <h4>Complated : </h4>
-                  <span>{complate}</span>
+                <button className="bg-green-200 border border-green-400 text-green-600 flex items-center gap-2 px-3 py-1.5 rounded-full  text-sm">
+                  <h4>completed : </h4>
+                  <span>{completed}</span>
                 </button>
-                <button className="bg-orange-200 border border-orange-400 text-orange-600 flex items-center gap-2 px-3 py-1.5 rounded-full cursor-pointer text-sm">
+                <button className="bg-orange-200 border border-orange-400 text-orange-600 flex items-center gap-2 px-3 py-1.5 rounded-full  text-sm">
                   <h4>Pending : </h4>
                   <span>{pending}</span>
                 </button>
-                <button className="bg-blue-200 border border-blue-400 text-blue-600 flex items-center gap-2 px-3 py-1.5 rounded-full cursor-pointer text-sm">
+                <button className="bg-blue-200 border border-blue-400 text-blue-600 flex items-center gap-2 px-3 py-1.5 rounded-full  text-sm">
                   <h4>Total : </h4>
                   <span>{total}</span>
                 </button>
@@ -241,63 +261,81 @@ const App = () => {
           {/* task display  */}
 
           <div className="overflow-y-scroll h-[calc(100vh-130px)] py-2">
-            <div className="grid md:grid-cols-2 gap-4 ">
-              {tasks.map((data) => (
-                <div
-                  key={data._id}
-                  className="
-                bg-[#000] rounded-md py-2 px-3"
-                >
+            {tasks.length > 0 ? (
+              <div className="grid md:grid-cols-2 gap-4 ">
+                {tasks.map((data) => (
                   <div
-                    className={`border-l-5  ${colorStyle[data.colors].border} rounded-md pl-3 flex gap-4 justify-between items-center`}
+                    key={data._id}
+                    className="
+                bg-[#000] rounded-md py-2 px-3"
                   >
-                    <div className="">
-                      <p
-                        className={`text-[16px] text-white/70  ${complate ? "line-through" : ""}`}
-                      >
-                        {data.text}
-                      </p>
-                      <span className="text-sm text-zinc-500">Created on</span>{" "}
-                      <span
-                        className={`text-sm font-bold ${colorStyle[data.colors].text}`}
-                      >
-                        {new Date(data.createdAt).toLocaleDateString("en-US", {
-                          weekday: "long",
-                        })}
-                      </span>{" "}
-                      <span
-                        className={`text-sm ${colorStyle[data.colors].text} `}
-                      >
-                        {new Date(data.createdAt).toLocaleDateString("en-US", {
-                          day: "2-digit",
-                          month: "long",
-                          year: "numeric",
-                        })}{" "}
-                        -{" "}
-                        {new Date(data.createdAt).toLocaleTimeString("en-US", {
-                          hour: "2-digit",
-                          minute: "2-digit",
-                        })}
-                      </span>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <button
-                        className="text-red-500 cursor-pointer text-[14px] "
-                        onClick={() => deleteTask(data._id)}
-                      >
-                        <FaTrash />
-                      </button>
-                      <button
-                        className="text-white cursor-pointer text-[14px] "
-                        onClick={() => updateTask(data._id)}
-                      >
-                        {complate ? <FaCheckCircle /> : <FaRegCircle />}
-                      </button>
+                    <div
+                      className={`border-l-5  ${colorStyle[data.colors].border} rounded-md pl-3 flex gap-4 justify-between items-center`}
+                    >
+                      <div className="">
+                        <p
+                          className={`text-[16px] text-white/70  ${data.taskDone ? "line-through" : ""}`}
+                        >
+                          {data.text}
+                        </p>
+                        <span className="text-sm text-zinc-500">
+                          Created on
+                        </span>{" "}
+                        <span
+                          className={`text-sm font-bold ${colorStyle[data.colors].text}`}
+                        >
+                          {new Date(data.createdAt).toLocaleDateString(
+                            "en-US",
+                            {
+                              weekday: "long",
+                            },
+                          )}
+                        </span>{" "}
+                        <span
+                          className={`text-sm ${colorStyle[data.colors].text} `}
+                        >
+                          {new Date(data.createdAt).toLocaleDateString(
+                            "en-US",
+                            {
+                              day: "2-digit",
+                              month: "long",
+                              year: "numeric",
+                            },
+                          )}{" "}
+                          -{" "}
+                          {new Date(data.createdAt).toLocaleTimeString(
+                            "en-US",
+                            {
+                              hour: "2-digit",
+                              minute: "2-digit",
+                            },
+                          )}
+                        </span>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <button
+                          className="text-red-500 cursor-pointer text-[14px] "
+                          onClick={() => deleteTask(data._id)}
+                        >
+                          <FaTrash />
+                        </button>
+                        <button
+                          className="text-white cursor-pointer text-[14px] "
+                          onClick={() => updateTask(data)}
+                        >
+                          {data.taskDone ? <FaCheckCircle /> : <FaRegCircle />}
+                        </button>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+            ) : (
+              <div className="flex flex-col justify-center items-center h-[calc(100vh-150px)]">
+                <img src="task-64.png" alt="" className="w-20 animate-bounce" />
+                <p className="text-zinc-400 text-2xl"> Empty List</p>
+              </div>
+            )}
           </div>
         </main>
       </div>
