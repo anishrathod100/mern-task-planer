@@ -13,7 +13,7 @@ const addTask = async (req, res) => {
 // get all task in db
 const getAllTask = async (req, res) => {
   try {
-    const tasks = await Task.find({});
+    const tasks = await Task.find({}).sort({ createdAt: -1 });
     res.status(201).json(tasks);
   } catch (error) {
     res.status(500).json({ message: error.message });

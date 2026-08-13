@@ -12,11 +12,11 @@ const taskSchema = new mongoose.Schema(
     },
     colors: {
       type: String,
-      enum: ["red", "pink", "blue", "green", "yellow", "grey"],
+      enum: ["red", "pink", "blue", "green", "yellow", "gray"],
       default: "grey",
     },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 const Task = new mongoose.model("Task", taskSchema);
