@@ -17,7 +17,6 @@ const App = () => {
   const [pending, setPending] = useState(0);
   const [completed, setCompleted] = useState(0);
   const [total, setTotal] = useState(0);
-
   const backend_url = "https://mern-task-planer.onrender.com";
   // get data
   const fetchData = async () => {
@@ -26,7 +25,7 @@ const App = () => {
       setTasks(data);
       setTotal(data.length);
       setPending(data.filter((item) => item.taskDone == false).length);
-      setComplate(data.filter((item) => item.taskDone == true).length);
+      setCompleted(data.filter((item) => item.taskDone == true).length);
     } catch (error) {
       console.log(error);
     }
@@ -83,9 +82,11 @@ const App = () => {
   // delete task
   const deleteAllTask = async () => {
     try {
-      const { data } = await axios.delete(backend_url + `/api/task`);
-      toast.success("All task deleted successfully");
-      fetchData();
+      if (confirm("Are you sure ? delete all records")) {
+        const { data } = await axios.delete(backend_url + `/api/task`);
+        toast.success("All task deleted successfully");
+        fetchData();
+      }
     } catch (error) {
       toast.error(error.message);
     }
@@ -243,11 +244,11 @@ const App = () => {
                   <h4>Delete All </h4>
                 </button>
                 <button className="bg-green-200 border border-green-400 text-green-600 flex items-center gap-2 px-3 py-1.5 rounded-full  text-sm">
-                  <h4>completed : </h4>
+                  <h4>Completed : </h4>
                   <span>{completed}</span>
                 </button>
                 <button className="bg-orange-200 border border-orange-400 text-orange-600 flex items-center gap-2 px-3 py-1.5 rounded-full  text-sm">
-                  <h4>Pending : </h4>
+                  <h4>Incompleted : </h4>
                   <span>{pending}</span>
                 </button>
                 <button className="bg-blue-200 border border-blue-400 text-blue-600 flex items-center gap-2 px-3 py-1.5 rounded-full  text-sm">
