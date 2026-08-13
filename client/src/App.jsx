@@ -18,7 +18,7 @@ const App = () => {
   const [completed, setCompleted] = useState(0);
   const [total, setTotal] = useState(0);
 
-  const backend_url = "http://localhost:8080";
+  const backend_url = "https://mern-task-planer.onrender.com";
   // get data
   const fetchData = async () => {
     try {
