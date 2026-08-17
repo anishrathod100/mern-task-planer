@@ -2,8 +2,13 @@ import Task from "../models/task.model.js";
 
 // add task in db
 const addTask = async (req, res) => {
+  const { text, taskDone, colors } = req.body;
   try {
-    const task = await Task.create(req.body);
+    const task = await Task.create({
+      text,
+      taskDone,
+      colors,
+    });
     res.status(201).json(task);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -13,7 +18,9 @@ const addTask = async (req, res) => {
 // get all task in db
 const getAllTask = async (req, res) => {
   try {
-    const tasks = await Task.find({}).sort({ createdAt: -1 });
+    const tasks = await Task.find({}).sort({
+      createdAt: -1,
+    });
     res.status(201).json(tasks);
   } catch (error) {
     res.status(500).json({ message: error.message });

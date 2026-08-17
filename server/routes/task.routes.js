@@ -7,6 +7,7 @@ import {
   getOneTask,
   updateTask,
 } from "../controllers/task.controller.js";
+import { AuthUser } from "../middlewares/auth.middleware.js";
 
 const router = express.Router();
 

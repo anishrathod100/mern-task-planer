@@ -3,10 +3,16 @@ import "./index.css";
 import App from "./App.jsx";
 import { Toaster } from "react-hot-toast";
 ("react-hot-toast");
+import { BrowserRouter } from "react-router-dom";
+import { AppContext } from "./context/AppContext.jsx";
 
 createRoot(document.getElementById("root")).render(
   <>
-    <App />
-    <Toaster />
+    <BrowserRouter>
+      <AppContext>
+        <App />
+      </AppContext>
+      <Toaster />
+    </BrowserRouter>
   </>,
 );

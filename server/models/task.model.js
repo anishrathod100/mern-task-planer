@@ -15,6 +15,10 @@ const taskSchema = new mongoose.Schema(
       enum: ["red", "pink", "blue", "green", "yellow", "gray"],
       default: "grey",
     },
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
   },
   { timestamps: true },
 );

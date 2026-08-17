@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import dns from "dns";
 // Force Node.js to use Google DNS for lookups
-dns.setServers(["8.8.8.8", "8.8.4.4"]);
+dns.setServers(["8.8.8.8", "0.0.0.0"]);
 
 export const connectDB = async () => {
   try {
