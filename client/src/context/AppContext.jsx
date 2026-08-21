@@ -140,6 +140,13 @@ export const AppContext = ({ children }) => {
     }
   };
 
+  // logout
+  const logout = () => {
+    setAuthUser(null);
+    setToken(null);
+    localStorage.removeItem("token");
+  };
+
   useEffect(() => {
     checkAuthUser();
   }, [tasks]);
@@ -164,6 +171,7 @@ export const AppContext = ({ children }) => {
     authUser,
     setAuthUser,
     login,
+    logout,
   };
   return <TaskContext.Provider value={values}>{children}</TaskContext.Provider>;
 };
