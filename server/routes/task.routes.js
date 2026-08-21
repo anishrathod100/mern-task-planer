@@ -11,11 +11,11 @@ import { AuthUser } from "../middlewares/auth.middleware.js";
 
 const router = express.Router();
 
-router.post("/add", addTask);
-router.get("/", getAllTask);
-router.get("/:id", getOneTask);
-router.put("/:id", updateTask);
-router.delete("/:id", deleteTask);
-router.delete("/", deleteAllTask);
+router.post("/add", AuthUser, addTask);
+router.get("/", AuthUser, getAllTask);
+router.get("/:id", AuthUser, getOneTask);
+router.put("/:id", AuthUser, updateTask);
+router.delete("/:id", AuthUser, deleteTask);
+router.delete("/", AuthUser, deleteAllTask);
 
 export default router;

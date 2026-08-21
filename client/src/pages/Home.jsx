@@ -38,7 +38,7 @@ const Home = () => {
           {/* task display  */}
 
           <div className="overflow-y-scroll h-[calc(100vh-130px)] py-2">
-            {tasks.length > 0 ? (
+            {tasks?.length > 0 ? (
               <div className="grid md:grid-cols-2 gap-4 ">
                 {tasks.map((data, index) => (
                   <Task data={data} key={index} />

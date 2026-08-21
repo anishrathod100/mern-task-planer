@@ -1,17 +1,20 @@
 import React, { useState } from "react";
 import { useContextData } from "../context/AppContext";
-import toast from "react-hot-toast";
-import axios from "axios";
 
 const Login = () => {
-  const { backend_url } = useContextData();
+  const { login } = useContextData();
   const [state, setState] = useState("Login");
   const [fullname, setFullname] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const formSubmit = async (e) => {
-    console.log(state);
     e.preventDefault();
+
+    login(state == "Register" ? "register" : "login", {
+      fullname,
+      email,
+      password,
+    });
   };
 
   return (

@@ -8,22 +8,23 @@ const addTask = async (req, res) => {
       text,
       taskDone,
       colors,
+      user: req.user._id,
     });
-    res.status(201).json(task);
+    res.json(task);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.json({ message: error.message });
   }
 };
 
 // get all task in db
 const getAllTask = async (req, res) => {
   try {
-    const tasks = await Task.find({}).sort({
+    const tasks = await Task.find({ user: req.user._id }).sort({
       createdAt: -1,
     });
-    res.status(201).json(tasks);
+    res.json(tasks);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.json({ message: error.message });
   }
 };
 
@@ -32,11 +33,11 @@ const getOneTask = async (req, res) => {
   try {
     const task = await Task.findById(req.params.id);
     if (!task) {
-      return res.status(404).json({ message: "Task not found" });
+      return res.json({ message: "Task not found" });
     }
-    res.status(200).json(task);
+    res.json(task);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.json({ message: error.message });
   }
 };
 
@@ -45,11 +46,11 @@ const updateTask = async (req, res) => {
   try {
     const task = await Task.findByIdAndUpdate(req.params.id, req.body);
     if (!task) {
-      return res.status(404).json({ message: "Task not found" });
+      return res.json({ message: "Task not found" });
     }
-    res.status(200).json(task);
+    res.json(task);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.json({ message: error.message });
   }
 };
 
@@ -58,21 +59,21 @@ const deleteTask = async (req, res) => {
   try {
     const task = await Task.findByIdAndDelete(req.params.id);
     if (!task) {
-      return res.status(404).json({ message: "Task not found" });
+      return res.json({ message: "Task not found" });
     }
-    res.status(200).json(task);
+    res.json(task);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.json({ message: error.message });
   }
 };
 
 // delete task in db
 const deleteAllTask = async (req, res) => {
   try {
-    await Task.deleteMany({});
-    res.status(200).json("All task deleted successfully");
+    await Task.deleteMany({ user: req.user._id });
+    res.json("All task deleted successfully");
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.json({ message: error.message });
   }
 };
 export {

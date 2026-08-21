@@ -19,6 +19,7 @@ const Form = () => {
     backend_url,
     fetchData,
     deleteAllTask,
+    token,
   } = useContextData();
   const formSubmit = async (e) => {
     try {
@@ -28,11 +29,15 @@ const Form = () => {
         toast.error("Enter task title");
         return;
       }
-      const { data } = await axios.post(backend_url + "/api/task/add", {
-        text: task,
-        colors: color,
-        taskDone: false,
-      });
+      const { data } = await axios.post(
+        backend_url + "/api/task/add",
+        {
+          text: task,
+          colors: color,
+          taskDone: false,
+        },
+        { headers: { token } },
+      );
       toast.success("Task added successfully");
       setTask("");
       setColor("gray");
