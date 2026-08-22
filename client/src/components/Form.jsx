@@ -150,12 +150,15 @@ const Form = () => {
       </div>
       <div className="w-full flex justify-center md:justify-end md:col-span-5">
         <div className="flex flex-wrap gap-2 ">
-          <button
-            className=" bg-red-200 border border-red-400 text-red-600 flex items-center gap-2 px-3 py-1.5 rounded-full cursor-pointer text-sm"
-            onClick={() => deleteAllTask()}
-          >
-            <h4>Delete All </h4>
-          </button>
+          {total && (
+            <button
+              className=" bg-red-200 border border-red-400 text-red-600 flex items-center gap-2 px-3 py-1.5 rounded-full cursor-pointer text-sm"
+              onClick={() => deleteAllTask()}
+            >
+              <h4>Delete All </h4>
+            </button>
+          )}
+
           <button className="bg-green-200 border border-green-400 text-green-600 flex items-center gap-2 px-3 py-1.5 rounded-full  text-sm">
             <h4>Completed : </h4>
             <span>{completed}</span>

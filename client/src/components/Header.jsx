@@ -18,7 +18,7 @@ const Header = () => {
             {authUser?.fullname[0]}
           </span>
         ) : (
-          <FaUser className="text-white  " />
+          <FaUser className="text-white " />
         )}
       </div>
       {modelOpen && (

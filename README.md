@@ -35,7 +35,9 @@ i create fully functinal modern responsive task management project using mern st
 
 - ➡️ fully working task manager,
 - ➡️ fully crud operation,
-- ➡️ Total number,
+- ➡️ Total number task,
+- ➡️ Login-Logout & Register,
+- ➡️ Authentication & Authorization,
 
 ---
 
@@ -60,3 +62,7 @@ i create fully functinal modern responsive task management project using mern st
 2. Responsive
 
 ![image not found](./demo/task-2.png)
+
+3. Tablet
+
+![image not found](./demo/task-3.png)
