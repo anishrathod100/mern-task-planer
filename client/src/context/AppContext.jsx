@@ -38,7 +38,7 @@ const colorStyle = {
 };
 
 export const AppContext = ({ children }) => {
-  const backend_url = "http://localhost:7000";
+  const backend_url = "https://backend-164e.onrender.com";
   const [tasks, setTasks] = useState([]);
   const [pending, setPending] = useState(0);
   const [completed, setCompleted] = useState(0);
